@@ -10,28 +10,44 @@ var fs = require('fs');
 var vm = require('vm');
 var path = './index.js';
 
-var code = fs.readFileSync(path);
-vm.runInThisContext(code);
+const index = require("../index").index;
+const piupiu = index.piupiu;
+const program = index.program;
 
 const assert = require('chai').assert
-const should = require('chai').should()
-// const assert = require('assert')
+const expect = require('chai').expect
 
-
+// console.log(index)
 describe('index.js', () => {
-  describe('business-logic', () => {
 
+  it("should have piupiu function", () => {
+    expect(piupiu).to.exist;
+  });
+
+  it("should have commander CLI ", () => {
+    assert.equal(program.constructor.name, 'Command')
+  });
+
+  it("should have commander CLI with options", () => {
+    assert.equal(program.option.length, 4)
+  });
+
+  describe('business-logic', () => {
+    describe('#piupiu', () => {
+      it("should return 'killed' if there is no wind", () => {
+        assert.equal('killed', piupiu(10, 10, 0));
+      });
+    });
   })
 
   describe('code', () => {
-    //такая функция вообще существует
+    describe('#piupiu', () => {
+      it("should return string", () => {
+        expect(piupiu()).to.be.a('string');
+        expect(piupiu(1)).to.be.a('string');
+        expect(piupiu(1, 1)).to.be.a('string');
+        expect(piupiu(100, 100, 0)).to.be.a('string');
+      });
+    });
   })
 })
-
-describe('index.js', function() {
-  describe('#piupiu', function() {
-    it("should return 'Killed' when there is no wind", function() {
-      assert.equal(null, piupiu());
-    });
-  });
-});
