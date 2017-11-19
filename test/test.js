@@ -34,8 +34,16 @@ describe('index.js', () => {
 
   describe('business-logic', () => {
     describe('#piupiu', () => {
-      it("should return 'killed' if there is no wind", () => {
-        assert.equal('killed', piupiu(10, 10, 0));
+      describe('killed result', () => {
+        it("should be no wind", () => {
+          assert.equal('killed', piupiu(10, 10, 0));
+        });
+      });
+
+      describe('miss result', () => {
+        it("should be no wind", () => {
+          assert.equal('killed', piupiu(10, 10, 0));
+        });
       });
     });
   })
