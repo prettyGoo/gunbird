@@ -5,11 +5,6 @@
 
 // Task not specific
 // функция piupiu вообще есть
-
-var fs = require('fs');
-var vm = require('vm');
-var path = './index.js';
-
 const index = require("../index").index;
 const piupiu = index.piupiu;
 const program = index.program;
@@ -17,7 +12,7 @@ const program = index.program;
 const assert = require('chai').assert
 const expect = require('chai').expect
 
-// console.log(index)
+
 describe('index.js', () => {
 
   it("should have piupiu function", () => {
@@ -35,14 +30,18 @@ describe('index.js', () => {
   describe('business-logic', () => {
     describe('#piupiu', () => {
       describe('killed result', () => {
-        it("should be no wind", () => {
+        it("should be if no wind", () => {
           assert.equal('killed', piupiu(10, 10, 0));
+        });
+
+        it("should be if zero distance", () => {
+          assert.equal('killed', piupiu(10, 0, 10));
         });
       });
 
       describe('miss result', () => {
-        it("should be no wind", () => {
-          assert.equal('killed', piupiu(10, 10, 0));
+        it("should be if no wind", () => {
+          // assert.equal('killed', piupiu(10, 10, 0));
         });
       });
     });
