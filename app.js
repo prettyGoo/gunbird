@@ -7,8 +7,10 @@ program
   .option('-x, --x <n>', 'A range', parseFloat)
   .option('-y, --y <n>', 'A list', parseFloat)
   .option('-b, --bullet <n>', 'A bullet velocity', parseFloat)
-  .option('-w, --wind', 'A wind velocity', parseFloat)
+  .option('-w, --wind', 'Wind speed', parseFloat)
   .parse(process.argv);
+
+  console.log(program.options)
 
  function shot(s_velocity, height, distance, b_velocity, w_velocity) {
   if (distance <= 0) {
@@ -28,9 +30,13 @@ program
     return angle;
    }
   
-   return -3; // Воробьи летают слишком быстро!!!
+   return 3; // Воробьи летают слишком быстро!!!
  }
 
- let angle = shot(program.sparrow, program.x, program.y, program.bullet, program.wind);
+ let angle_code = shot(program.sparrow, program.x, program.y, program.bullet, program.wind);
 
- console.log('The angle is ' + angle);
+codes = {
+  3: 'Killed'
+}
+
+ console.log(codes[angle_code]);

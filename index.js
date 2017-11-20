@@ -6,25 +6,38 @@ program
   .option('-h, --height <n>', 'A sparrow and gun height', parseFloat)
   .option('-d, --distance <n>', 'Distance between sparrow and gun', parseFloat)
   .option('-w, --wind <n>', 'The wind velocity', parseFloat)
+  .option('-b, --bullet <n>', 'The bullet velocity', parseFloat)
   .parse(process.argv);
 
 
-function piupiu(height, distance, windVelocity) {
-  console.log(height, distance, windVelocity)
+function piupiu(height, distance, bulletVelocity, windVelocity) {
   try {
-    if  (distance === 0 || windVelocity === 0) {
-      return 'killed'
+    if (height < 0) {
+      return undefined;
+    }
+
+    if (distance === 0) {
+      return 0
+    }
+
+    if (bulletVelocity === 0) {
+      return undefined;
+    }
+
+    if (windVelocity === 0) {
+      let angel = Math.asin(distance * 9.81 / bulletVelocity^2) / 2;
+      return angel
     }
 
     throw 'Somethins went wrong'
   }
   catch (err) {
-    return err
+    console.log(err)
   }
 }
 
-const result = piupiu(program.height, program.distance, program.wind);
-console.log(`${result}`)
+const angel = piupiu(program.height, program.distance, program.bullet, program.wind);
+console.log(`The angel is ${angel}`)
 
 exports.index =  {
   piupiu: piupiu,

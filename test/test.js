@@ -1,10 +1,3 @@
-// Task specific
-// В одной точке
-// Оба на земле, ветер дует вниз
-// Оба под землей
-
-// Task not specific
-// функция piupiu вообще есть
 const index = require("../index").index;
 const piupiu = index.piupiu;
 const program = index.program;
@@ -29,31 +22,37 @@ describe('index.js', () => {
 
   describe('business-logic', () => {
     describe('#piupiu', () => {
-      describe('killed result', () => {
-        it("should be if no wind", () => {
-          assert.equal('killed', piupiu(10, 10, 0));
-        });
 
-        it("should be if zero distance", () => {
-          assert.equal('killed', piupiu(10, 0, 10));
-        });
+      it('should be 0 if zero distance', () => {
+        assert.equal(0, piupiu(10, 0, 10, 10));
+
+        assert.equal(0, piupiu(10, 0, 10, 0));
+
+        assert.equal(0, piupiu(10, 0, 0, 10));
       });
 
-      describe('miss result', () => {
-        it("should be if no wind", () => {
-          // assert.equal('killed', piupiu(10, 10, 0));
-        });
+      it('should be undefined if below earth', () => {
+        assert.equal(undefined, piupiu(-10, 10, 0, 10));
+      });
+
+      it('should be undefined if bullet velocity is 0', () => {
+        assert.equal(undefined, piupiu(10, 10, 0, 10));
+      });
+
+      it('should be undefined if not real', () => {
+        assert.equal(undefined, piupiu(10, 100000, 10, 10));
       });
     });
   })
 
   describe('code', () => {
     describe('#piupiu', () => {
-      it("should return string", () => {
-        expect(piupiu()).to.be.a('string');
-        expect(piupiu(1)).to.be.a('string');
-        expect(piupiu(1, 1)).to.be.a('string');
-        expect(piupiu(100, 100, 0)).to.be.a('string');
+      it('should return string if error', () => {
+        expect(piupiu()).to.be.a('undefined');
+  
+        expect(piupiu(1)).to.be.a('undefined');
+  
+        expect(piupiu('1')).to.be.a('undefined');
       });
     });
   })
