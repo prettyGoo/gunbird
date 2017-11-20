@@ -10,6 +10,16 @@ program
   .option('-w, --wind', 'A wind velocity', parseFloat)
   .parse(process.argv);
 
+  function checkArgs() {
+    if (!program.sparrow) throw new Error('--sparrow required');
+    if (!program.x) throw new Error('--x required');
+    if (!program.y) throw new Error('--y required');
+    if (!program.bullet) throw new Error('--bullet required');
+    if (!program.wind) throw new Error('--wind required');    
+  }
+
+  checkArgs();
+
  function shot(s_velocity, height, distance, b_velocity, w_velocity) {
   if (distance <= 0) {
     return -1; // Воробей сидит на земле 
