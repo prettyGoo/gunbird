@@ -10,7 +10,19 @@ program
   .option('-w, --wind', 'Wind speed', parseFloat)
   .parse(process.argv);
 
+<<<<<<< HEAD
   console.log(program.options)
+=======
+  function checkArgs() {
+    if (!program.sparrow) throw new Error('--sparrow required');
+    if (!program.x) throw new Error('--x required');
+    if (!program.y) throw new Error('--y required');
+    if (!program.bullet) throw new Error('--bullet required');
+    if (!program.wind) throw new Error('--wind required');    
+  }
+
+  checkArgs();
+>>>>>>> 852722a00319d307006adae6a216d0a65b32bb27
 
  function shot(s_velocity, height, distance, b_velocity, w_velocity) {
   if (distance <= 0) {
